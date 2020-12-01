@@ -1,7 +1,5 @@
 <?php
-//require_once("includes/initialize.php");
-// Four steps to closing a session
-// (i.e. logging out)
+// closing a session (i.e. logging out)
 
 // 1. Find the session
 session_start();
@@ -11,8 +9,6 @@ unset($_SESSION['user_info']);
 unset($_SESSION['email']); 		
 unset($_SESSION['pw']);	
 
- 	
-// 4. Destroy the session
-//session_destroy();
+// 3. Redirect to home page
 echo "<script> window.location.assign('index.php'); </script>";
 ?>
