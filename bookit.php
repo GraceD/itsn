@@ -1,9 +1,12 @@
 <?php 
+//start session
 session_start();
+// if no one is logged in, throw error, redirect to login page
 	if(empty($_SESSION['user_info'])){
     echo "<script type='text/javascript'>alert('Please login before proceeding further!');</script>";
     echo "<script> window.location.assign('index.php'); </script>";
 	}
+// connect to database
 $conn = mysqli_connect("localhost","root","password","ITSN");
 if(!$conn){  
 	echo "<script type='text/javascript'>alert('Database failed');</script>";
@@ -15,7 +18,7 @@ if(!$conn){
 <html>
 <head>
 	<title>Book a Room</title>
-
+	// confirm that a room has been selected from the form
 	<script type="text/javascript">
 		function validate()	{
 			var rooms=document.getElementById("rooms");
@@ -109,7 +112,7 @@ if(!$conn){
                         </div>
                         </div>
 	<div class="row">
-	
+	// form to pick a classroom
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb30">
                         <div class="tour-booking-form">
 						<form action='booked.php' method='POST' name="formRoom" onsubmit="return validate()">
@@ -177,24 +180,9 @@ if(!$conn){
 
 	</div>
  </div>
- <!------ END First "Room Tab" ##################################################################### ---------->
-			
-		
+ <!------ END First "Room Tab" ##################################################################### --------
 
-			
-         
-        
-       
-
-               
-        
-  
-        
-        
-  
-
-
-<!------ Begin Third "Room Tab" ##################################################################### ---------->  
+<!------ Begin Second "Room Tab" ##################################################################### ---------->  
         <div class="container-fluid col-sm-6 booking-item green">
           <div class="pricing-divider ">
               <h3 class="text-light">Auditorium</h3>
@@ -242,7 +230,7 @@ if(!$conn){
                         </div>
                         </div>
 	<div class="row">
-	
+	// form to pick auditorium room
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb30">
                         <div class="tour-booking-form">
 						<form action='account.php' method='POST' name="audrooms" onsubmit="return validate()">
