@@ -1,9 +1,12 @@
 <?php 
+// starts session
 session_start();
+//if no user logged in, throw error and redirect to login screen
 	if(empty($_SESSION['user_info'])){
     echo "<script type='text/javascript'>alert('Please login before proceeding further!');</script>";
     echo "<script> window.location.assign('index.php'); </script>";
 	}
+//connect to database
 $conn = mysqli_connect("localhost","root","password","ITSN");
 if(!$conn){  
 	echo "<script type='text/javascript'>alert('Database failed');</script>";
@@ -16,6 +19,7 @@ if(!$conn){
 <head>
 	<title>Cancel a Reservation</title>
 
+// script to ensure a reservation has been selected
 	<script type="text/javascript">
 		function validate()	{
 			var rooms=document.getElementById("rooms");
@@ -58,7 +62,7 @@ if(!$conn){
       <div class="row m-auto text-center w-75">
       <div class="card-body text-center mx-auto bg-white mt-0 shadow col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
 
-
+//card to display form for picking a reservation to cancel
       <div class="container">
 			<div class="row">
 				<div class="span10">
@@ -119,6 +123,8 @@ if(!$conn){
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<script>window.jQuery || document.write('<script src="js/jquery-latest.min.js">\x3C/script>')</script>
 		<script type="text/javascript" src="js/bootstrap.js"></script>
+	      
+	//script to make sure a reservation has been selected
 		<script type="text/javascript">
 			function validateCheckBox()
 			{
