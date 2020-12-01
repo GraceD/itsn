@@ -1,9 +1,12 @@
 <?php 
+// starts session
 session_start();
+// checks to see if user is logged in, if not, throws errors, redirects to login page
 	if(empty($_SESSION['user_info'])){
     echo "<script type='text/javascript'>alert('Please login before proceeding further!');</script>";
     echo "<script> window.location.assign('index.php'); </script>";
 	}
+// connects to database
 $conn = mysqli_connect("localhost","root","password","ITSN");
 if(!$conn){  
 	echo "<script type='text/javascript'>alert('Database failed');</script>";
@@ -15,7 +18,7 @@ if(!$conn){
 <html>
 <head>
 	<title>Cancel a Reservation</title>
-
+// makes sure a room has been selected off the form
 	<script type="text/javascript">
 		function validate()	{
 			var rooms=document.getElementById("rooms");
@@ -62,6 +65,7 @@ if(!$conn){
 			<div class="row">
 				<div class="span10">
 					<?php
+					//makes sure the form has been submitted, a room has been chosen, deletes chosen room from bookings table
 						if(isset($_POST['formSubmit'])) 
 						{
 							if(isset($_POST['formRoom']))
