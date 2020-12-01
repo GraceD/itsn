@@ -1,5 +1,7 @@
 <?php
+//starts session
 session_start();
+// if the form has been filled out and submitted, connect to database
 if (isset($_POST['submit']))
 {
 	$conn = mysqli_connect("localhost","root","password","ITSN");
@@ -7,6 +9,8 @@ if(!$conn){
 	echo "<script type='text/javascript'>alert('Database failed');</script>";
   	die('Could not connect: '.mysqli_connect_error());  
 }
+
+// sets variables from what's in the form, validates them against database, takes to account page or gives error
 $email=$_POST['email'];
 $pw=$_POST['pw'];
 $sql = "SELECT * FROM user WHERE email = '$email' AND passwrd = '$pw';";
@@ -45,7 +49,6 @@ $sql_result = mysqli_query ($conn, $sql) or die ('request "Could not execute SQL
         -ms-user-select: none;
         user-select: none;
       }
-
       @media (min-width: 768px) {
         .bd-placeholder-img-lg {
           font-size: 3.5rem;
@@ -56,6 +59,7 @@ $sql_result = mysqli_query ($conn, $sql) or die ('request "Could not execute SQL
     <link href="css/signin.css" rel="stylesheet">
   </head>
 
+//script to set variables from form, make sure it's an actual email address and the password fits length requirement
   <script type="text/javascript">
 	function validate()	{
 		var EmailId=document.getElementById("email");
@@ -79,6 +83,8 @@ $sql_result = mysqli_query ($conn, $sql) or die ('request "Could not execute SQL
 </script>
 
 <body>
+	
+// card to display login form
 <div class="card-body text-center mx-auto bg-white mt-0 shadow col-xl-3 col-lg-6 col-md-6 col-sm-6 col-12">
 	<div id="loginarea" class="text-center">
   <form id="login" action="index.php" onsubmit="return validate()" method="post" name="login">
