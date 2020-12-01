@@ -1,9 +1,12 @@
 <?php 
+//start session
 session_start();
+//if no user logged in, throw error and redirect to login page
 	if(empty($_SESSION['user_info'])){
     echo "<script type='text/javascript'>alert('Please login before proceeding further!');</script>";
     echo "<script> window.location.assign('index.php'); </script>";
 	}
+// connect to database
 $conn = mysqli_connect("localhost","root","password","ITSN");
 if(!$conn){  
 	echo "<script type='text/javascript'>alert('Database failed');</script>";
@@ -15,7 +18,7 @@ if(!$conn){
 <html>
 <head>
 	<title>Make a Reservation</title>
-
+// script to confirm a room has been selected
 	<script type="text/javascript">
 		function validate()	{
 			var rooms=document.getElementById("rooms");
@@ -57,7 +60,7 @@ if(!$conn){
 <div style="height: 625px;" class="container-fluid bg-gradient p-5">
       <div class="row m-auto text-center w-75">
       <div class="card-body text-center mx-auto bg-white mt-0 shadow col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-
+// if room wasn't selected, redirect to account page
 <?php 
 if (!isset($_POST['formRoom'])) {
     header('Location: account.php'); exit;
@@ -95,7 +98,9 @@ if (isset($error)) {
 
 
 $roomNumber = NULL;
-
+	      
+// insert chosen room into bookings database 
+	      
 for($i=1; $i<11; $i++)
 {
 	$chparam = "ch" . strval($i);
@@ -111,7 +116,7 @@ for($i=1; $i<11; $i++)
 	}
 }
 
-
+// redirect to account page
 header('Location: account.php?s='.urlencode('Your room is booked.')); exit;
 
 ?>
