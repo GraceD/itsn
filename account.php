@@ -1,8 +1,12 @@
 <?php 
+// start session
 session_start();
+// if no user logged in, throw error and send back to login page
 	if(empty($_SESSION['user_info'])){
 		echo "<script type='text/javascript'>alert('Please login before proceeding further!');</script>";
+		echo "<script> window.location.assign('index.php'); </script>";
 	}
+// connect to database
 $conn = mysqli_connect("localhost","root","password","ITSN");
 if(!$conn){  
 	echo "<script type='text/javascript'>alert('Database failed');</script>";
@@ -76,7 +80,7 @@ if(!$conn){
                           if ($conn->connect_error) {
                             die("Connection failed: " . $conn->connect_error);
                           }
-
+		// print booking history to page
                           $sql = "SELECT confirmation_number, roomID, date, time FROM bookings";
                           $result = $conn->query($sql);
 
@@ -90,10 +94,6 @@ if(!$conn){
                           } else {
                             echo "no bookings";
                           }
-
-                        
-
-
                           $conn->close();
                           ?>
               </br></br></br>
@@ -134,10 +134,10 @@ if(!$conn){
                           if ($conn->connect_error) {
                             die("Connection failed: " . $conn->connect_error);
                           }
-
+			// get info from database
                           $sql = "SELECT username, studentID, email, name FROM user";
                           $result = $conn->query($sql);
-
+			// print user information to account page
                           if ($result->num_rows > 0) {
                             echo "<table><tr><th>StudentID</th><th>Name</th></tr>";
                             // output data of each row
